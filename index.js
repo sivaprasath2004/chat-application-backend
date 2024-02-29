@@ -5,12 +5,14 @@ const socketio=require('socket.io')
 const server=http.createServer(app)
 const io=socketio(server,{cors:{origin:'*'}})
 const {addUsers,removeUser,getUser}=require('./entity')
+const App=require('./app')
 app.get('/',(req,res)=>res.send("worked"))
 io.on("connect",socket=>{
   console.log('Connect')
   socket.on('join', ({name,room},callBack) => {
     console.log('joined')
     const {user,error}=addUsers({id:socket.id,name:name,room:room})
+    App({id:socket.id,name,room})
     if(error){
       callBack(error)
       console.log(error)
