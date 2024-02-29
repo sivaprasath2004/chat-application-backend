@@ -12,7 +12,6 @@ io.on("connect",socket=>{
   socket.on('join', ({name,room},callBack) => {
     console.log('joined')
     const {user,error}=addUsers({id:socket.id,name:name,room:room})
-    App({id:socket.id,name,room})
     if(error){
       callBack(error)
       console.log(error)
