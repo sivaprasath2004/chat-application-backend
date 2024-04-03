@@ -8,7 +8,7 @@ const cors = require("cors");
 const { addUsers, removeUser, getUser } = require("./entity");
 app.get("/", (req, res) => res.send("worked"));
 app.use(cors());
-io.origins("*:*");
+io.origins("https://chat-application-vert.vercel.app:443");
 io.on("connect", (socket) => {
   console.log("Connect");
   socket.on("join", ({ name, room }, callBack) => {
