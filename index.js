@@ -8,6 +8,7 @@ const cors = require("cors");
 const { addUsers, removeUser, getUser } = require("./entity");
 app.get("/", (req, res) => res.send("worked"));
 app.use(cors());
+io.origins("*:*");
 io.on("connect", (socket) => {
   console.log("Connect");
   socket.on("join", ({ name, room }, callBack) => {
