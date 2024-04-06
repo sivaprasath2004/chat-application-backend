@@ -12,6 +12,13 @@ const io = socketio(server, {
 const cors = require("cors");
 const { addUsers, removeUser, getUser } = require("./entity");
 app.get("/", (req, res) => res.send("worked"));
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://chat-application-vert.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  next();
+});
 app.use(cors());
 io.on("connect", (socket) => {
   console.log("Connect");
