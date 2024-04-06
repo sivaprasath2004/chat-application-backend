@@ -3,12 +3,16 @@ const app = express();
 const http = require("http");
 const socketio = require("socket.io");
 const server = http.createServer(app);
-const io = socketio(server, { cors: { origin: "*" } });
+const io = socketio(server, { 
+  cors: { 
+    origin: "https://chat-application-vert.vercel.app",
+    methods: ["GET", "POST"] 
+  } 
+});
 const cors = require("cors");
 const { addUsers, removeUser, getUser } = require("./entity");
 app.get("/", (req, res) => res.send("worked"));
 app.use(cors());
-io.origins("https://chat-application-vert.vercel.app:443");
 io.on("connect", (socket) => {
   console.log("Connect");
   socket.on("join", ({ name, room }, callBack) => {
